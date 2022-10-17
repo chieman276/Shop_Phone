@@ -140,7 +140,7 @@
             <div class="col-sm-2">
             </div>
             <div class="col-sm-10">
-                <h3 class="container">Đơn hàng trống!</h3>
+                <h3 class="container">Đơn hàng trống! <a href="{{route('websiteProduct')}}">-> Đi tới trang sản phẩm</a> </h3> 
             </div>
             <br><br><br><br><br><br><br><br>
         </div>

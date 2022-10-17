@@ -40,3 +40,6 @@ Route::get('cart', [ProductController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [ProductController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove.from.cart');
+Route::delete('remove_all_product', [ProductController::class, 'remove_all_product'])->name('remove_all_product');
+
+Route::get('/admin_products', [ProductController::class, 'admin_products'])->name('admin_products');

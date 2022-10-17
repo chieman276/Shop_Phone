@@ -22,6 +22,11 @@ class LoginController extends Controller
         $password = $request->password;
         $checkUserByemail = User::where('email', $email)->take(1)->first();
         if ($checkUserByemail && Hash::check($request->password, $checkUserByemail->password)) {
+            $products = session('cart');
+            foreach ($products as $product){
+                unset($products[$product['id']]);
+                session()->put('cart', $products);
+            }
             Auth::login($checkUserByemail);
             return redirect()->route('websiteProduct')->with('success', 'Đăng nhập thành công!');;
         } else {

@@ -20,15 +20,6 @@ class ProductController extends Controller
         return view('frontend.website.product', $param);
     }
 
-    public function products()
-    {
-        $products = Product::all();
-        $param = [
-            'products' => $products,
-        ];
-         return response()->json($param, 200);
-        // return view('frontend.website.product', $param);
-    }
 
     public function showProduct($id)
     {
@@ -50,8 +41,8 @@ class ProductController extends Controller
     public function addToCart($id)
     {
         $product = Product::findOrFail($id);
-        // echo "<pre>"; print_r($product);die();
         $cart = session()->get('cart', []);
+
 
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
@@ -99,6 +90,7 @@ class ProductController extends Controller
         }
     }
 
+
     public function checkout()
     {
         return view('frontend.website.checkout');
@@ -113,7 +105,50 @@ class ProductController extends Controller
             $orders['product_id'] = $id_product['id'];
             DB::table('orders')->insert($orders);
         }
+        $products = session('cart');
+        foreach ($products as $product){
+            unset($products[$product['id']]);
+            session()->put('cart', $products);
+        }
         session()->flash('success', 'Giao dịch thành công!');
+        
+    }
+
+    public function remove_all_product()
+    {
+        $products = session('cart');
+        foreach ($products as $product){
+            unset($products[$product['id']]);
+            session()->put('cart', $products);
+        }
+        return redirect()->route('cart')->with('success', 'Xóa thành công');
+    }
+
+
+    //API
+    public function products()
+    {
+        $products = Product::all();
+        $param = [
+            'products' => $products,
+        ];
+         return response()->json($param, 200);
+        // return view('frontend.website.product', $param);
+    }
+    public function products_store(Request $request)
+    {
+        $product = new Product();
+        $product->productName = $request->productName;
+        $product->description = $request->description;
+        $product->image = $request->image;
+        $product->price = $request->price;
+        $product->save();
+        
+        $param = [
+            'products' => $product,
+        ];
+         return response()->json($param, 200);
+        // return view('frontend.website.product', $param);
     }
     
 }

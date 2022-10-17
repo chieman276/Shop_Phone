@@ -68,12 +68,6 @@ class DatabaseSeeder extends Seeder
 
     public function importProducts()
     {
-        // $table->string('productName');
-        // $table->string('description');
-        // $table->string('image');
-        // $table->string('price');
-
-
         $product = new Product();
         $product->productName = 'Iphone 12 ProMax xanh dương';
         $product->description = 'iPhone 12 Pro Max 128 GB một siêu phẩm smartphone đến từ Apple. Máy có một hiệu năng hoàn toàn mạnh mẽ đáp ứng tốt nhiều nhu cầu đến từ người dùng và mang trong mình một thiết kế đầy vuông vức, sang trọng.';
@@ -102,7 +96,7 @@ class DatabaseSeeder extends Seeder
         $product->productName = 'IPhone 14 Pro 256GB';
         $product->description = 'iPhone 14 Pro 256GB một siêu phẩm smartphone đến từ Apple. Máy có một hiệu năng hoàn toàn mạnh mẽ đáp ứng tốt nhiều nhu cầu đến từ người dùng và mang trong mình một thiết kế đầy vuông vức, sang trọng.';
         $product->image = "https://cdn.tgdd.vn/Products/Images/42/289691/iphone-14-pro-vang-thumb-600x600.jpg";
-        $product->price = '27456000';
+        $product->price = '44990000';
         $product->save();
 
         $product = new Product();

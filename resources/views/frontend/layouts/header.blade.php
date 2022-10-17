@@ -45,9 +45,11 @@
 								<div class="dropdown-menu"  style="min-width:350px; z-index: 10000">
 									<div class="row ">
 										<div class="col-lg-4">
+											<a href="{{ route('cart') }}">
 											<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span
 												class="badge badge-pill badge-danger">{{ count((array) session('cart'))
 												}}</span>
+											</a>
 										</div>
 										@php $total = 0 @endphp
 										@foreach((array) session('cart') as $id => $details)
@@ -75,8 +77,7 @@
 									@endif
 									<div class="row">
 										<div class="col-lg-12 col-sm-12 col-12 text-center checkout">
-											<a href="{{ route('cart') }}" class="btn btn-primary btn-block">Xem tất
-												cả</a>
+											<a href="{{ route('cart') }}" class="btn btn-primary btn-block show_all_in_cart">Xem tất cả</a>
 										</div>
 									</div>
 								</div>

@@ -2398,6 +2398,14 @@ h2.title {
   margin-top: 16px;
 }
 
+.show_all_in_cart {
+  background:#FE980F;
+  border: 0 none;
+  border-radius: 4;
+  margin-top: 16px;
+  height: 25px;
+}
+
 .blank-arrow {
   position: relative;
 }
