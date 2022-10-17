@@ -23,7 +23,7 @@ Route::get('/loginvv', function () {
 Route::get('/frontend', function () {
     return view('frontend.layouts.master');
 });
-
+Route::resource('products', ProductController::class);
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('/post_login', [LoginController::class, 'post_login'])->name('post_login');
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
@@ -38,8 +38,10 @@ Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout'
 Route::post('/orders', [ProductController::class, 'orders'])->name('orders');
 Route::get('cart', [ProductController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
-Route::patch('update-cart', [ProductController::class, 'update'])->name('update.cart');
+Route::patch('update-cart', [ProductController::class, 'update_product'])->name('update.cart');
 Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove.from.cart');
 Route::delete('remove_all_product', [ProductController::class, 'remove_all_product'])->name('remove_all_product');
 
 Route::get('/admin_products', [ProductController::class, 'admin_products'])->name('admin_products');
+Route::get('/export', [ProductController::class, 'export'])->name('products.export');
+Route::post('/import', [ProductController::class, 'import'])->name('products.import');
