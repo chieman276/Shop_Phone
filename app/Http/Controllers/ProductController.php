@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session;
@@ -9,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Excel;
 
 class ProductController extends Controller
 {
@@ -136,6 +141,7 @@ class ProductController extends Controller
          return response()->json($param, 200);
         // return view('frontend.website.product', $param);
     }
+
     public function products_store(Request $request)
     {
         $product = new Product();
@@ -253,6 +259,23 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Xóa' . ' ' .  'thành công');;
     }
+
+    public function export()
+    {
+        return FacadesExcel::download(new ProductExport, 'product.xlsx');
+    }
+
+    public function import()
+    {
+        try {
+            FacadesExcel::import(new ProductImport,request()->file('file'));
+            return back();
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return back()->with('error', 'Vui lòng chọn File');
+        }
+    }
+    
 
    
 }
