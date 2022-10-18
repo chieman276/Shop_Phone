@@ -142,7 +142,7 @@ class DatabaseSeeder extends Seeder
         $product->productName = 'Lava Z21';
         $product->description = 'Lava Z21 (2GB RAM, 32GB ROM)-Blue| Octa Core Processor| Stock Android 11| Powerful 3100 mAh Battery.';
         $product->image = "https://m.media-amazon.com/images/I/71gWzvbGHtL._SX679_.jpg";
-        $product->price = '1529000';
+        $product->price = '15290000';
         $product->save();
 
 

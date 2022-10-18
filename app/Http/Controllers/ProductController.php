@@ -161,9 +161,11 @@ class ProductController extends Controller
 
     public function index()
     {
+        $product_count  = Product::count();
         $products = Product::all();
         $params = [
             'products' => $products,
+            'product_count' => $product_count,
         ];
         return view('admin.products.index', $params);
     }
@@ -257,7 +259,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Xóa' . ' ' .  'thành công');;
+        return redirect()->route('products.index')->with('success', 'Xóa' . ' ' .  'thành công');
     }
 
     public function export()
@@ -269,7 +271,7 @@ class ProductController extends Controller
     {
         try {
             FacadesExcel::import(new ProductImport,request()->file('file'));
-            return back();
+            return redirect()->route('products.index')->with('success', 'Thêm' . ' ' .  'thành công');;
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return back()->with('error', 'Vui lòng chọn File');

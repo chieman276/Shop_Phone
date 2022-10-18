@@ -47,11 +47,11 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-th="Price">{{ $details['price'] }} đ</td>
+                        <td data-th="Price">{{ number_format($details['price']) }} đ</td>
                         <td data-th="Quantity">
                             <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity update-cart" />
                         </td>
-                        <td data-th="Subtotal" class="text-center">{{ $details['price'] * $details['quantity'] }} đ</td>
+                        <td data-th="Subtotal" class="text-center">{{ number_format($details['price'] * $details['quantity']) }} đ</td>
                         <td class="actions" data-th="">
                             <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
                         </td>
