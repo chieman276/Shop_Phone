@@ -275,7 +275,20 @@ class ProductController extends Controller
             return back()->with('error', 'Vui lòng chọn File');
         }
     }
-    
 
-   
+    public function delete_many(Request $request)
+    {
+        $validated = $request->validate(
+            [
+                'ids' => 'required',
+            ],
+            [
+                'ids.required' => 'Bạn phải chọn ô',
+            ],
+        );
+        $id=$request->ids;
+        Product::whereIn('id', $id)->delete();
+        return redirect()->route('products.index')->with('success', 'Xóa thành công');
+    }
+
 }

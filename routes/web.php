@@ -41,6 +41,7 @@ Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('a
 Route::patch('update-cart', [ProductController::class, 'update_product'])->name('update.cart');
 Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove.from.cart');
 Route::delete('remove_all_product', [ProductController::class, 'remove_all_product'])->name('remove_all_product');
+Route::delete('delete_many', [ProductController::class, 'delete_many'])->name('delete_many');
 
 Route::get('/admin_products', [ProductController::class, 'admin_products'])->name('admin_products');
 Route::get('/export', [ProductController::class, 'export'])->name('products.export');
