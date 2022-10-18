@@ -49,7 +49,7 @@
         <form action="{{ route('delete_many')}}" style="display:inline" method="post">
             @csrf
             @method('delete')
-            <button type="submit" class="btn btn-success sent">Xóa Nhanh</button>
+            <button type="submit" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm !')" class="btn btn-success sent">Xóa Nhanh</button>
             @if ($errors->any())
             <p style="color:red">{{ $errors->first('ids') }}</p>
             @endif
@@ -93,6 +93,9 @@
 </body>
 <script>
     $('#checkAll').click(function () {
+        $(':checkbox.checkItem').prop('checked', this.checked);
+    });
+    $('#checkItem').click(function () {
         $(':checkbox.checkItem').prop('checked', this.checked);
     });
 </script>

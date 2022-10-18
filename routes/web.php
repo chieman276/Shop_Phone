@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ Route::get('/frontend', function () {
     return view('frontend.layouts.master');
 });
 Route::resource('products', ProductController::class);
+Route::resource('users', UserController::class);
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('/post_login', [LoginController::class, 'post_login'])->name('post_login');
 Route::get('/register', [RegisterController::class, 'register'])->name('register');

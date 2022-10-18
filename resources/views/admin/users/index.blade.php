@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
 
@@ -29,7 +29,6 @@
                     <th>Số điên thoại</th>
                     <th>Ngày sinh</th>
                     {{-- <th>Mật Khẩu</th> --}}
-                    <th>Nhóm</th>
                     <th>Chức năng</th>
                 </tr>
             </thead>
@@ -37,12 +36,11 @@
                 @foreach ($users as $user)
                 <tr class="text-center">
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->userName }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->phone }}</td>
                     <td>{{ $user->birthday }}</td>
                     {{-- <td>{{ $user->password }}</td> --}}
-                    <td>{{ $user->userGroup->name }}</td>
                     <td>
                         {{-- <a href="{{ route('users.show',$user->id )}}" class="btn btn-primary">Xem</a> --}}
                         <a href="{{ route('users.edit',$user->id )}}" class="btn btn-warning">Sửa</a>
@@ -58,9 +56,9 @@
 
             </tbody>
         </table>
-        <div style="float:right">
+        {{-- <div style="float:right">
             {{ $users->links() }}
-        </div>
+        </div> --}}
     </div>
 
 </body>

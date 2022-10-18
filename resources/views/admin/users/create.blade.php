@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
 
@@ -12,7 +12,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Tên người dùng</label>
-                        <input type="text" id="name" name="name" class="form-control">
+                        <input type="text" id="name" name="userName" class="form-control">
                         <label id="name-error" class="error" for="name" style="display: none;color:red">Vui lòng nhập
                             tên người dùng
                         </label>
@@ -36,16 +36,9 @@
                         <label id="password-error" class="error" for="password" style="display: none;color:red">Vui lòng nhập
                             mật khẩu
                         </label>
-                        <label for="tf1">Nhóm nhân viên</label>
-                        <select class="form-select form-control" name="user_group_id">
-
-                            @foreach($userGroups as $userGroup)
-                            <option value="{{ $userGroup->id }}">{{ $userGroup->name }} </option>
-                            @endforeach
-                        </select>
                     </div>
                     <button style="float: right" class="submit btn btn-primary">Thêm</button>
-                    <a href="{{ route('categories.index')}}" class="btn btn-secondary">Trở về</a>
+                    <a href="{{ route('users.index')}}" class="btn btn-secondary">Trở về</a>
                 </div>
                 <div class="col-lg-3"></div>
             </div>

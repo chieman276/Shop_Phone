@@ -14,11 +14,11 @@
                         Danh Sách Sản Phẩm
                         <div class="sb-sidenav-collapse-arrow"></div>
                     </a>
-                    {{-- <a class="nav-link collapsed" href="{{ route('users.index')}}">
+                    <a class="nav-link collapsed" href="{{ route('users.index')}}">
                         <div class="sb-nav-link-icon"></div>
                         Danh Sách Người Dùng
                         <div class="sb-sidenav-collapse-arrow"></div>
-                    </a> --}}
+                    </a>
                 </div>
             </div>
         </nav>
