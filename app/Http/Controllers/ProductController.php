@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 use App\Exports\ProductExport;
 use App\Imports\ProductImport;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session;
@@ -17,6 +18,21 @@ use Maatwebsite\Excel\Excel;
 
 class ProductController extends Controller
 {
+    public function home()
+    {
+        $product_count = Product::count();
+        $user_count = User::count();
+        $order_count = Order::count();
+
+        $params = [
+            'product_count' => $product_count,
+            'user_count' => $user_count,
+            'order_count' => $order_count,
+        ];
+
+        return view('admin.home',$params);
+    }
+
     public function websiteProduct()
     {
         $products = Product::all();
@@ -37,7 +53,7 @@ class ProductController extends Controller
     }
 
 
-    
+
     public function cart()
     {
         return view('frontend.website.cart');
@@ -50,9 +66,8 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
 
 
-        if(isset($cart[$id])) {
+        if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
-
         } else {
 
             $cart[$id] = [
@@ -74,7 +89,7 @@ class ProductController extends Controller
 
     {
 
-        if($request->id && $request->quantity){
+        if ($request->id && $request->quantity) {
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
@@ -82,13 +97,13 @@ class ProductController extends Controller
         }
     }
 
-  
+
 
     public function remove(Request $request)
     {
-        if($request->id) {
+        if ($request->id) {
             $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
+            if (isset($cart[$request->id])) {
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
@@ -101,29 +116,31 @@ class ProductController extends Controller
     {
         return view('frontend.website.checkout');
     }
-    
+
     public function orders()
     {
         $sum_product = session('cart');
         $user =  Auth::user();
-        foreach ($sum_product as $id_product){
+        foreach ($sum_product as $id_product) {
             $orders['user_id'] = $user->id;
             $orders['product_id'] = $id_product['id'];
+            $orders['quantity'] = $id_product['quantity'];
+            $orders['total'] = $id_product['price'] * $id_product['quantity'];
+            $orders['status'] = '0';
             DB::table('orders')->insert($orders);
         }
         $products = session('cart');
-        foreach ($products as $product){
+        foreach ($products as $product) {
             unset($products[$product['id']]);
             session()->put('cart', $products);
         }
         session()->flash('success', 'Giao dịch thành công!');
-        
     }
 
     public function remove_all_product()
     {
         $products = session('cart');
-        foreach ($products as $product){
+        foreach ($products as $product) {
             unset($products[$product['id']]);
             session()->put('cart', $products);
         }
@@ -138,7 +155,7 @@ class ProductController extends Controller
         $param = [
             'products' => $products,
         ];
-         return response()->json($param, 200);
+        return response()->json($param, 200);
         // return view('frontend.website.product', $param);
     }
 
@@ -150,11 +167,11 @@ class ProductController extends Controller
         $product->image = $request->image;
         $product->price = $request->price;
         $product->save();
-        
+
         $param = [
             'products' => $product,
         ];
-         return response()->json($param, 200);
+        return response()->json($param, 200);
         // return view('frontend.website.product', $param);
     }
 
@@ -169,7 +186,6 @@ class ProductController extends Controller
         ];
         return view('admin.products.index', $params);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -189,7 +205,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $product = new Product();
         $product->productName = $request->productName;
         $product->description = $request->description;
@@ -244,7 +260,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->image = $request->image;
         $product->price = $request->price;
-        
+
         $product->save();
         return redirect()->route('products.index')->with('success', 'Sửa' . ' ' . $request->productName . ' ' .  'thành công');;
     }
@@ -270,7 +286,7 @@ class ProductController extends Controller
     public function import()
     {
         try {
-            FacadesExcel::import(new ProductImport,request()->file('file'));
+            FacadesExcel::import(new ProductImport, request()->file('file'));
             return redirect()->route('products.index')->with('success', 'Thêm' . ' ' .  'thành công');;
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -288,9 +304,35 @@ class ProductController extends Controller
                 'ids.required' => 'Bạn phải chọn ô',
             ],
         );
-        $id=$request->ids;
+        $id = $request->ids;
         Product::whereIn('id', $id)->delete();
         return redirect()->route('products.index')->with('success', 'Xóa thành công');
     }
 
+    public function list_orders()
+    {
+        $list_orders = Order::all();
+        $users = User::all();
+        $products = Product::all();
+        $params = [
+            'list_orders' => $list_orders,
+            'users' => $users,
+            'products' => $products,
+        ];
+ 
+        return view('frontend.website.list_orders', $params);
+    }
+
+    public function update_list_orders(Request $request)
+    {
+        if ($request->id) {
+            $id = $request->id;
+            $status = '1';
+            Order::where('id', $id)->update(array(
+                'status' => $status,
+            ));
+        }
+
+        session()->flash('success', 'Kích hoạt thành công !');
+    }
 }

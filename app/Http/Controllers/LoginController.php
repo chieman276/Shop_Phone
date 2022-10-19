@@ -28,7 +28,7 @@ class LoginController extends Controller
             //     session()->put('cart', $products);
             // }
             Auth::login($checkUserByemail);
-            return redirect()->route('websiteProduct')->with('success', 'Đăng nhập thành công!');;
+            return redirect()->route('home')->with('success', 'Đăng nhập thành công!');;
         } else {
             Session::flash('error_login', 'Thông tin tài khoản hoặc mật khẩu không chính xác');
             return redirect()->back();

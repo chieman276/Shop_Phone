@@ -24,18 +24,19 @@ Route::get('/loginvv', function () {
 Route::get('/frontend', function () {
     return view('frontend.layouts.master');
 });
-Route::resource('products', ProductController::class);
-Route::resource('users', UserController::class);
+Route::resource('products', ProductController::class)->middleware('CheckLogin');
+Route::resource('users', UserController::class)->middleware('CheckLogin');
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('/post_login', [LoginController::class, 'post_login'])->name('post_login');
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/post_register', [RegisterController::class, 'post_register'])->name('post_register');
-Route::get('/website/product', [ProductController::class, 'websiteProduct'])->name('websiteProduct');
+Route::get('/website/product', [ProductController::class, 'websiteProduct'])->name('websiteProduct')->middleware('CheckLogin');
 // Route::post('/website/add_to_cart', [ProductController::class, 'add_to_cart'])->name('add_to_cart');
 Route::get('/website/showProduct/{id}', [ProductController::class, 'showProduct'])->name('showProduct');
 // Route::get('cart', [ProductController::class, 'cart'])->name('cart');
 // Route::patch('updateQuantity-cart', [ProductController::class, 'updateQuantity'])->name('update.cart');
 
+Route::get('/home', [ProductController::class, 'home'])->name('home');
 Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
 Route::post('/orders', [ProductController::class, 'orders'])->name('orders');
 Route::get('cart', [ProductController::class, 'cart'])->name('cart');
@@ -48,3 +49,5 @@ Route::delete('delete_many', [ProductController::class, 'delete_many'])->name('d
 Route::get('/admin_products', [ProductController::class, 'admin_products'])->name('admin_products');
 Route::get('/export', [ProductController::class, 'export'])->name('products.export');
 Route::post('/import', [ProductController::class, 'import'])->name('products.import');
+Route::get('/list_orders', [ProductController::class, 'list_orders'])->name('list_orders');
+Route::patch('/update_list_order', [ProductController::class, 'update_list_orders'])->name('update_list_orders');
