@@ -18,6 +18,7 @@ use Maatwebsite\Excel\Excel;
 
 class ProductController extends Controller
 {
+    //Home
     public function home()
     {
         $product_count = Product::count();
@@ -34,6 +35,7 @@ class ProductController extends Controller
         return view('admin.home', $params);
     }
 
+    //Wedsite
     public function websiteProduct()
     {
         $products = Product::all();
@@ -42,7 +44,6 @@ class ProductController extends Controller
         ];
         return view('frontend.website.product', $param);
     }
-
 
     public function showProduct($id)
     {
@@ -53,13 +54,11 @@ class ProductController extends Controller
         return view('frontend.website.detail', $params);
     }
 
-
-
+    //Cart
     public function cart()
     {
         return view('frontend.website.cart');
     }
-
 
     public function addToCart($id)
     {
@@ -85,7 +84,6 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Đã thêm sản phẩm vào giỏ hàng!');
     }
 
-
     public function update_product(Request $request)
     {
 
@@ -96,8 +94,6 @@ class ProductController extends Controller
             session()->flash('success', 'Cập nhật giỏ hàng thành công!');
         }
     }
-
-
 
     public function remove(Request $request)
     {
@@ -111,7 +107,23 @@ class ProductController extends Controller
         }
     }
 
+    public function remove_all_product()
+    {
+        $products = session('cart');
+        foreach ($products as $product) {
+            unset($products[$product['id']]);
+            session()->put('cart', $products);
+        }
 
+        try {
+            return redirect()->route('cart')->with('success', 'Xóa thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('cart')->with('error', 'Xóa không thành công');
+        }
+    }
+
+    //Checkout
     public function checkout()
     {
         return view('frontend.website.checkout');
@@ -142,24 +154,7 @@ class ProductController extends Controller
         }
     }
 
-    public function remove_all_product()
-    {
-        $products = session('cart');
-        foreach ($products as $product) {
-            unset($products[$product['id']]);
-            session()->put('cart', $products);
-        }
-
-        try {
-            return redirect()->route('cart')->with('success', 'Xóa thành công');
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return redirect()->route('cart')->with('error', 'Xóa không thành công');
-        }
-    }
-
-
-    //API
+    //API list products
     public function products()
     {
         $products = Product::all();
@@ -186,7 +181,7 @@ class ProductController extends Controller
         // return view('frontend.website.product', $param);
     }
 
-
+    //CRUD
     public function index()
     {
         $product_count  = Product::count();
@@ -198,22 +193,11 @@ class ProductController extends Controller
         return view('admin.products.index', $params);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.products.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreProductRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -231,23 +215,11 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $product = Product::find($id);
@@ -257,13 +229,6 @@ class ProductController extends Controller
         return view('admin.products.edit', $params);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
@@ -280,12 +245,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $product = Product::find($id);
@@ -298,6 +257,7 @@ class ProductController extends Controller
         }
     }
 
+    //Export and Import file Excel
     public function export()
     {
         return FacadesExcel::download(new ProductExport, 'product.xlsx');
@@ -314,6 +274,7 @@ class ProductController extends Controller
         }
     }
 
+    //Delete many
     public function delete_many(Request $request)
     {
         $validated = $request->validate(
@@ -324,11 +285,18 @@ class ProductController extends Controller
                 'ids.required' => 'Bạn phải chọn ô',
             ],
         );
-        $id = $request->ids;
-        Product::whereIn('id', $id)->delete();
-        return redirect()->route('products.index')->with('success', 'Xóa thành công');
+
+        try {
+            $id = $request->ids;
+            Product::whereIn('id', $id)->delete();
+            return redirect()->route('products.index')->with('success', 'Xóa thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('products.index')->with('error', 'Xóa không thành công');
+        }
     }
 
+    //List Order
     public function list_orders()
     {
         $list_orders = Order::select('*')->paginate(5);
