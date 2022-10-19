@@ -87,7 +87,6 @@ class ProductController extends Controller
 
 
     public function update_product(Request $request)
-
     {
 
         if ($request->id && $request->quantity) {
@@ -191,7 +190,7 @@ class ProductController extends Controller
     public function index()
     {
         $product_count  = Product::count();
-        $products = Product::all();
+        $products = Product::select('*')->paginate(10);
         $params = [
             'products' => $products,
             'product_count' => $product_count,
@@ -332,7 +331,7 @@ class ProductController extends Controller
 
     public function list_orders()
     {
-        $list_orders = Order::all();
+        $list_orders = Order::select('*')->paginate(5);
         $users = User::all();
         $products = Product::all();
         $params = [

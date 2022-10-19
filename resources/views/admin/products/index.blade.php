@@ -88,7 +88,9 @@
                 </tbody>
             </table>
         </form>
-    
+        <div style="float:right">
+            {{ $products->links() }}
+        </div>
     </div>
 </body>
 <script>

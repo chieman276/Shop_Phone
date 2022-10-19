@@ -61,6 +61,9 @@
         
                     </tbody>
                 </table>
+                <div style="float:right">
+                    {{ $list_orders->links() }}
+                </div>
             </div>
         
         </body>
