@@ -8,11 +8,11 @@
 				</div>
 			</div>
 			<div class="col-lg-2">
-				<div class="btn-group">
+				{{-- <div class="btn-group">
 					<a href="{{ route('websiteProduct') }}">
 						<h3><span class="fas fa-address-book"></span> Sản Phẩm
 					</a></h3>
-				</div>
+				</div> --}}
 			</div>
 			<div class="col-lg-3">
 				<div class="btn-group">

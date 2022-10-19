@@ -9,14 +9,14 @@
                     </a>
                     <div class="sb-sidenav-menu-heading">Interface</div>
                     
-                    <a class="nav-link collapsed" href="{{ route('products.index')}}">
-                        <div class="sb-nav-link-icon"></div>
-                        Danh Sách Sản Phẩm
-                        <div class="sb-sidenav-collapse-arrow"></div>
-                    </a>
                     <a class="nav-link collapsed" href="{{ route('users.index')}}">
                         <div class="sb-nav-link-icon"></div>
                         Danh Sách Người Dùng
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                    <a class="nav-link collapsed" href="{{ route('products.index')}}">
+                        <div class="sb-nav-link-icon"></div>
+                        Danh Sách Sản Phẩm
                         <div class="sb-sidenav-collapse-arrow"></div>
                     </a>
                     <a class="nav-link collapsed" href="{{ route('list_orders')}}">

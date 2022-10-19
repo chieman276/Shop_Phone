@@ -28,7 +28,7 @@
             </div>
             <div class="col-xl-5 col-md-6">
                 <div class="card bg-info text-white mb-4">
-                    <h1 class="text-center">Có tổng số {{$user_count}} đơn hàng</h1>
+                    <h1 class="text-center">Có tổng số {{$order_count}} đơn hàng</h1>
                 </div>
             </div>
         </div>

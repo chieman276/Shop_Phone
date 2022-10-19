@@ -18,10 +18,6 @@
     <div class="shopper-informations">
         @php
         $sum_product = session('cart');
-        // foreach ($sum_product as $id_product){
-        //     $id = $id_product['id'];
-        //     echo "<pre>"; print_r($id);echo "</pre>";
-        //     }
         @endphp
         @if(count($sum_product) >= 1)
         <div class="row">
@@ -31,10 +27,10 @@
                 <table id="cart" class="table table-hover table-condensed">
                     <thead>
                         <tr>
-                            <th style="width:60%">
+                            <th style="width:65%">
                                 <h3>Sản Phẩm</h3>
                             </th>
-                            <th style="width:40%">
+                            <th style="width:35%">
                                 <h3>Tổng tiền</h3>
                             </th>
                         </tr>
@@ -58,7 +54,7 @@
                                 </div>
                             </td>
                             <td>
-                                <h4 class="nomargin">{{ $details['price'] * $details['quantity']}} đ</h4>
+                                <h4 class="nomargin" style="color: red" >{{ number_format($details['price'] * $details['quantity'])}} đ</h4>
                             </td>
                         </tr>
                         @endforeach
@@ -71,14 +67,7 @@
                                     <h3 style="color:red ;"><strong>Tổng cộng tiền thanh toán:{{ number_format(
                                             $total)}}
                                             đ</strong></h3>
-                                            {{-- @php
-                                            foreach ($sum_product as $id_product){
-                                                $orders['user_id'] = $userAll->id;
-                                                $orders['product_id'] = $id_product['id'];
-                                                DB::table('orders')->insert($orders);
-                                            }
-                                            @endphp--}}
-                                    <a href="{{ route('websiteProduct') }}" class="btn btn-warning"><i
+                                    <a href="{{ route('cart') }}" class="btn btn-warning"><i
                                             class="fa fa-angle-left"></i> Trở về</a>
                                     <button class="btn btn-success remove-from-cart">Mua</button>
                                 </td>

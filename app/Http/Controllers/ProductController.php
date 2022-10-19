@@ -24,13 +24,14 @@ class ProductController extends Controller
         $user_count = User::count();
         $order_count = Order::count();
 
+
         $params = [
             'product_count' => $product_count,
             'user_count' => $user_count,
             'order_count' => $order_count,
         ];
 
-        return view('admin.home',$params);
+        return view('admin.home', $params);
     }
 
     public function websiteProduct()
@@ -134,7 +135,12 @@ class ProductController extends Controller
             unset($products[$product['id']]);
             session()->put('cart', $products);
         }
-        session()->flash('success', 'Giao dịch thành công!');
+        try {
+            session()->flash('success', 'Giao dịch thành công!');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            session()->flash('error', 'Giao dịch không thành công!');
+        }
     }
 
     public function remove_all_product()
@@ -144,7 +150,13 @@ class ProductController extends Controller
             unset($products[$product['id']]);
             session()->put('cart', $products);
         }
-        return redirect()->route('cart')->with('success', 'Xóa thành công');
+
+        try {
+            return redirect()->route('cart')->with('success', 'Xóa thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('cart')->with('error', 'Xóa không thành công');
+        }
     }
 
 
@@ -260,9 +272,13 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->image = $request->image;
         $product->price = $request->price;
-
-        $product->save();
-        return redirect()->route('products.index')->with('success', 'Sửa' . ' ' . $request->productName . ' ' .  'thành công');;
+        try {
+            $product->save();
+            return redirect()->route('products.index')->with('success', 'Sửa' . ' ' . $request->productName . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('products.index')->with('error', 'Sửa' . ' ' . $request->productName . ' ' .  'không thành công');
+        }
     }
 
     /**
@@ -275,7 +291,12 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Xóa' . ' ' .  'thành công');
+        try {
+            return redirect()->route('products.index')->with('success', 'Xóa' . ' ' .  'thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('products.index')->with('error', 'Xóa' . ' ' .  'không thành công');
+        }
     }
 
     public function export()
@@ -319,7 +340,7 @@ class ProductController extends Controller
             'users' => $users,
             'products' => $products,
         ];
- 
+
         return view('frontend.website.list_orders', $params);
     }
 
