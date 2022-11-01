@@ -46,7 +46,7 @@
                         <a href="{{ route('users.edit',$user->id )}}" class="btn btn-warning">Sửa</a>
                         <form action="{{ route('users.destroy',$user->id )}}" style="display:inline" method="post">
 
-                            <button class="btn btn-danger" onclick="return confirm('Xóa {{$user->name}} ?')">Xóa</button>
+                            <button class="btn btn-danger" onclick="return confirm('Xóa {{$user->name}} ?')">Xóa </button>
                             @csrf
                             @method('delete')
                         </form>

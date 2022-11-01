@@ -8,14 +8,23 @@
 
         <div class="col-lg-6">
             <h1 class="text-center mt-5">Danh sách sản phẩm</h1>
-        </div>
+        </div> <br>
         <div class="col-lg-12 mt-3">
             <div class="row">
                 <div class="col-lg-2">
                     <a href="{{route('products.create')}}" class="btn btn-primary">Thêm sản phẩm</a>
                 </div>
-                <div class="col-lg-5">
-
+                <div class="col-lg-2">
+                    <form action="" method="GET" id="form-search">
+                        <div class="input-group input-group-alt">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#modalFilterColumns">Tìm nâng cao 🔎</button>
+                            </div>
+                        </div>
+                        @include('admin.products.modals.modalFilterColumns')
+                    </form>
+                </div>
+                <div class="col-lg-3">
                     <a href="{{route('products.export')}}" class="btn btn-primary">
                         <i class="fas fa-file"></i>
                         <span class="ml-1">Xuất Sản Phẩm</span>

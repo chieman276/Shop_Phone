@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 use App\Exports\ProductExport;
+use App\Http\Requests\RegisterRequest;
 use App\Imports\ProductImport;
 use App\Models\Order;
 use App\Models\Product;
@@ -182,11 +183,25 @@ class ProductController extends Controller
     }
 
     //CRUD
-    public function index()
+    public function index(Request $request)
     {
+        // $products = Product::select('*')->orderBy('id', 'desc')->paginate(10);
+        $query = Product::select('*');
+        if (isset($request->filter['productName']) && $request->filter['productName']) {
+            $name = $request->filter['productName'];
+            $query->where('productName', 'LIKE', '%' . $name . '%');
+        }
+
+        if ($request->s) {
+            $query->where('productName', 'LIKE', '%' . $request->s . '%');
+            $query->orwhere('id', $request->s);
+        }
+
         $product_count  = Product::count();
-        $products = Product::select('*')->paginate(10);
+        $query->orderBy('id', 'desc');
+        $products = $query->paginate(10);
         $params = [
+            'filter' => $request->filter,
             'products' => $products,
             'product_count' => $product_count,
         ];
@@ -198,7 +213,7 @@ class ProductController extends Controller
         return view('admin.products.create');
     }
 
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
 
         $product = new Product();
@@ -229,7 +244,7 @@ class ProductController extends Controller
         return view('admin.products.edit', $params);
     }
 
-    public function update(Request $request, $id)
+    public function update(RegisterRequest $request, $id)
     {
         $product = Product::find($id);
         $product->productName = $request->productName;

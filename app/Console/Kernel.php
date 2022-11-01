@@ -15,8 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('delete_image')->dailyAt('14:36');
-        $schedule->command('add_product')->dailyAt('11:39');
+        $schedule->command('add_product')->dailyAt('00:00');
     }
 
     /**

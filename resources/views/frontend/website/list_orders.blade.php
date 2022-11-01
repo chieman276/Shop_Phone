@@ -52,16 +52,14 @@
                 
                             @if($order->status == '0')
                             <td>
-                                <button class="btn btn-success activated_status {{$order->id}}"> Chưa kích hoạt </button>
+                                <button class="btn btn-success activated_status {{$order->id}}"> Chưa kích hoạt 🔒</button>
                             @else
-                            <td> <button class="btn btn-secondary"> Đã kích hoạt </button> </td>
+                            <td> <button class="btn btn-secondary"> Đã kích hoạt 🔑 </button> </td>
                             @endif
                         </tr>
                         @endforeach
-        
-                    </tbody>
                 </table>
-                <div style="float:right">
+                <div style="float:right">            
                     {{ $list_orders->links() }}
                 </div>
             </div>

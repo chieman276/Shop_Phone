@@ -59,6 +59,20 @@
                 $('#name-error').hide();
 
             }
+
+            if (can_submit == false) {
+                return false;
+            }
+
+            var can_submit = true;
+            var name = $('#email').val();
+            if (name == '') {
+                $('#email-error').show();
+                can_submit = false;
+            } else {
+                $('#email-error').hide();
+
+            }
             if (can_submit == false) {
                 return false;
             }

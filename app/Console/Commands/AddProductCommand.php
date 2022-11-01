@@ -40,14 +40,12 @@ class AddProductCommand extends Command
 
     public function handle()
     {
-        // die('12345');
         $response = Http::get('http://127.0.0.1:8000/api/products');
-        // $response = array_unique($response);
         $products = $response->body();
         if (isset($products)) {
             $products = json_decode($products, true);
             $products = ($products['products']);
-            foreach ($products as $date => $product) {
+            foreach ($products as $data => $product) {
                 $add_products['productName'] = $product['productName'];
                 $add_products['description'] = $product['description'];
                 $add_products['image'] = $product['image'];
