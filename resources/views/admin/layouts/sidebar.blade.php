@@ -24,6 +24,11 @@
                         Danh Sách Đơn Hàng
                         <div class="sb-sidenav-collapse-arrow"></div>
                     </a>
+                    <a class="nav-link collapsed" href="{{ route('discounts.index')}}">
+                        <div class="sb-nav-link-icon"></div>
+                        Danh Sách Mã Giảm Giá
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
                 </div>
             </div>
         </nav>

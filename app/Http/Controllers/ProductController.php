@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 use App\Exports\ProductExport;
 use App\Http\Requests\RegisterRequest;
 use App\Imports\ProductImport;
+use App\Models\Discount;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
@@ -58,7 +59,11 @@ class ProductController extends Controller
     //Cart
     public function cart()
     {
-        return view('frontend.website.cart');
+        $discounts = Discount::all();
+        $params = [
+            'discounts' => $discounts,
+        ];
+        return view('frontend.website.cart',$params);
     }
 
     public function addToCart($id)

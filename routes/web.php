@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
@@ -25,6 +26,7 @@ Route::get('/frontend', function () {
     return view('frontend.layouts.master');
 });
 Route::resource('products', ProductController::class);
+Route::resource('discounts', DiscountController::class);
 Route::resource('users', UserController::class);
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('/post_login', [LoginController::class, 'post_login'])->name('post_login');
@@ -51,3 +53,5 @@ Route::get('/export', [ProductController::class, 'export'])->name('products.expo
 Route::post('/import', [ProductController::class, 'import'])->name('products.import');
 Route::get('/list_orders', [ProductController::class, 'list_orders'])->name('list_orders');
 Route::patch('/update_list_order', [ProductController::class, 'update_list_orders'])->name('update_list_orders');
+Route::patch('/result_discounts', [DiscountController::class, 'result_discounts'])->name('result_discounts');
+

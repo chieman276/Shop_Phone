@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Discount;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -20,6 +21,45 @@ class DatabaseSeeder extends Seeder
     {
         $this->importUsers();
         $this->importProducts();
+        $this->importDiscounts();
+    }
+
+    public function importDiscounts()
+    {
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam100k';
+        $discount->price = '100000';
+        $discount->product_id = 1;
+        $discount->user_id = 1;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam200k';
+        $discount->price = '200000';
+        $discount->product_id = 1;
+        $discount->user_id = 1;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam300k';
+        $discount->price = '300000';
+        $discount->product_id = 1;
+        $discount->user_id = 1;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam400k';
+        $discount->price = '400000';
+        $discount->product_id = 1;
+        $discount->user_id = 1;
+        $discount->save();
+        
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam500k';
+        $discount->price = '500000';
+        $discount->product_id = 1;
+        $discount->user_id = 1;
+        $discount->save();
     }
 
     public function importUsers()
