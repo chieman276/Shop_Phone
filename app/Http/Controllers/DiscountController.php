@@ -55,6 +55,9 @@ class DiscountController extends Controller
             if($discountName != $discount['discountName']){
                 session()->flash('error', 'Áp dụng mã không thành công!');
             }
+            if($discountName == $discount['discountName'] && $discount['user_id'] != $user['id']){
+                session()->flash('error', 'Áp dụng mã không thành công!');
+            }
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             session()->flash('error', 'Áp dụng mã không thành công!');
