@@ -249,7 +249,7 @@ class ProductController extends Controller
         return view('admin.products.edit', $params);
     }
 
-    public function update(RegisterRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $product = Product::find($id);
         $product->productName = $request->productName;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -45,7 +46,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->birthday = $request->birthday;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         try {
             $user->save();
             return redirect()->route('users.index')->with('success', 'Thêm' . ' ' . $request->userName . ' ' .  'thành công');
@@ -95,7 +96,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->birthday = $request->birthday;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         try {
             $user->save();
             return redirect()->route('users.index')->with('success', 'Sửa' . ' ' . $request->userName . ' ' .  'thành công');

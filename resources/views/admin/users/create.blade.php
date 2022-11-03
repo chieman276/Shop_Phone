@@ -12,28 +12,38 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Tên người dùng</label>
-                        <input type="text" id="name" name="userName" class="form-control">
+                        <input type="text" id="name" name="userName" placeholder="Nhập tên người dùng" class="form-control">
                         <label id="name-error" class="error" for="name" style="display: none;color:red">Vui lòng nhập
                             tên người dùng
                         </label>
+                    </div>
+                    <div class="form-group">
                         <label>Email</label>
-                        <input type="text" id="email" name="email" class="form-control">
+                        <input type="text" id="email" name="email" placeholder="Nhập tên email" class="form-control">
                         <label id="email-error" class="error" for="email" style="display: none;color:red">Vui lòng nhập
-                        email
+                            email
                         </label>
+                    </div>
+                    <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="text" id="phone" name="phone" class="form-control">
+                        <input type="text" id="phone" name="phone" placeholder="Nhập tên số điện thoại" class="form-control">
                         <label id="phone-error" class="error" for="phone" style="display: none;color:red">Vui lòng nhập
                             số điện thoại
                         </label>
+                    </div>
+                    <div class="form-group">
                         <label>Ngày sinh</label>
                         <input type="date" id="birthday" name="birthday" class="form-control">
-                        <label id="birthday-error" class="error" for="birthday" style="display: none;color:red">Vui lòng nhập
+                        <label id="birthday-error" class="error" for="birthday" style="display: none;color:red">Vui lòng
+                            nhập
                             ngày sinh
                         </label>
+                    </div>
+                    <div class="form-group">
                         <label>Mật khẩu</label>
-                        <input type="password" id="password" name="password" class="form-control">
-                        <label id="password-error" class="error" for="password" style="display: none;color:red">Vui lòng nhập
+                        <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" class="form-control">
+                        <label id="password-error" class="error" for="password" style="display: none;color:red">Vui lòng
+                            nhập
                             mật khẩu
                         </label>
                     </div>
@@ -60,17 +70,37 @@
 
             }
 
-            if (can_submit == false) {
-                return false;
-            }
-
-            var can_submit = true;
             var name = $('#email').val();
             if (name == '') {
                 $('#email-error').show();
                 can_submit = false;
             } else {
                 $('#email-error').hide();
+
+            }
+
+            var name = $('#phone').val();
+            if (name == '') {
+                $('#phone-error').show();
+                can_submit = false;
+            } else {
+                $('#phone-error').hide();
+
+            }
+            var name = $('#birthday').val();
+            if (name == '') {
+                $('#birthday-error').show();
+                can_submit = false;
+            } else {
+                $('#birthday-error').hide();
+
+            }
+            var name = $('#password').val();
+            if (name == '') {
+                $('#password-error').show();
+                can_submit = false;
+            } else {
+                $('#password-error').hide();
 
             }
             if (can_submit == false) {

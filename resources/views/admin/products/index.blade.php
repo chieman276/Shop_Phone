@@ -73,10 +73,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
+                    @foreach ($products as $key => $product)
                     <tr class="text-center">
                         <td><input type="checkbox" class="checkItem" name="ids[{{$product->id}}]"
-                            value="{{$product->id}}">{{ $product->id }}</td>
+                            value="{{$product->id}}">{{ ++$key }}</td>
                         <td style="width: 120px">{{ $product->productName }} </td>
                         <td><img src="{{ asset($product->image) }}" style="width: 140px"> </td>
                         <td>{{ number_format($product->price) }}</td>
