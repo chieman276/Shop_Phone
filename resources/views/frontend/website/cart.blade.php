@@ -77,17 +77,19 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <select class="value_discountName" >
-                                            <option class="value_discountName" value="">Các mã giảm giá</option>
+                                            <option value="">Các mã giảm giá</option>
                                             @php
                                             $cart = session('cart');
+                                            echo "<pre>"; 
+                                            print_r($cart); 
+                                            echo"</pre>";
                                             @endphp
                                             @foreach($discounts as $discount)
                                             @if($discount->user_id == $userAll->id)
-                                            <option type="radio" class="value_discountName" value="{{$discount->discountName}}"><p> {{$discount->discountName}} </p></option>
+                                            <option value="{{$discount->discountName}}"><p> {{$discount->discountName}} </p></option>
                                             @endif
                                             @endforeach
                                         </select>
-                                        <p style="color: red" id="show_message"></p>
                                     </div>
                                     <div class="col-lg-7">
                                         <input type="text" class="form-control discountName" name="discountName"
@@ -124,6 +126,10 @@
 
     <script type="text/javascript">
         $('.validate_discountName').hide();
+        $(".value_discountName").change(function () {
+        var discount_name = this.value;
+        var inputVal = $('.discountName').val(discount_name);
+        });
         $(".btn_discount").click(function (e) {
             e.preventDefault();
             var ele = $(this);
