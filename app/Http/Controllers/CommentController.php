@@ -3,11 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CommentController extends Controller
 {
+
+    public function index()
+    {
+        $comments = Comment::all();
+        $users = User::all();
+        $products  = Product::all();
+
+        $params = [
+            'comments' => $comments,
+            'users' => $users,
+            'products' => $products,
+        ];
+        return view('admin.comments.index', $params);
+    }
+
+    public function destroy($id)
+    {
+        $comment = Comment::find($id);
+        try {
+        $comment->delete();
+        return redirect()->route('comments.index')->with('success', 'Xóa thành công');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->route('comments.index')->with('error', 'Xóa không thành công');
+        }
+    }
+
     public function add_comment( Request $request)
     {
         $request_data = $request->all();
@@ -21,12 +51,6 @@ class CommentController extends Controller
         $comment->product_id = $product_id;
         $comment->save();
         session()->flash('success', 'Đã cập nhật bình luận của bạn');
-        
-        
-        // echo "<pre>";
-        // print_r($request_data);
-        // echo "</pre>";
-        // die();
 
     }
 }

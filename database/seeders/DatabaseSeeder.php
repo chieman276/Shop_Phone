@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         $comment = new Comment();
         $comment->comment_name = 'Sản phẩm đẹp';
         $comment->user_id = 3;
-        $comment->product_id = 1;
+        $comment->product_id = 6;
         $comment->save();
         $comment = new Comment();
 
@@ -66,19 +66,19 @@ class DatabaseSeeder extends Seeder
         $comment = new Comment();
         $comment->comment_name = 'Sản phẩm đẹp';
         $comment->user_id = 2;
-        $comment->product_id = 1;
+        $comment->product_id = 5;
         $comment->save();
         $comment = new Comment();
 
         $comment->comment_name = 'Chất lượng';
         $comment->user_id = 2;
-        $comment->product_id = 1;
+        $comment->product_id = 3;
         $comment->save();
 
         $comment = new Comment();
-        $comment->comment_name = 'Iphone 12 ProMax xanh dương';
+        $comment->comment_name = 'Iphone 14 Pro 1TB';
         $comment->user_id = 2;
-        $comment->product_id = 1;
+        $comment->product_id = 3;
         $comment->save();
         $comment = new Comment();
 

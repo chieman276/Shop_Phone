@@ -28,6 +28,7 @@ Route::get('/frontend', function () {
 });
 Route::resource('products', ProductController::class);
 Route::resource('discounts', DiscountController::class);
+Route::resource('comments', CommentController::class);
 Route::resource('users', UserController::class);
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('/post_login', [LoginController::class, 'post_login'])->name('post_login');

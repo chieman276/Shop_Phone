@@ -12,7 +12,7 @@ class Comment extends Model
     protected $table = 'comments';
     protected $fillable = ['comment_name', ' user_id','product_id'];
 
-    public function Products()
+    public function Product()
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }

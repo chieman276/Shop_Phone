@@ -3,23 +3,6 @@
 @section('content')
 
 <div class="container" id="exampleModal" tabindex="-1" role="dialog">
-    <div class="row">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-10">
-            <div class="session-title">
-                @if (Session::has('success'))
-            </div>
-            <div class="text text-success">
-                <h3><b>{{session::get('success')}}</b></h3>
-            </div>
-            @endif
-            @if (Session::has('error'))
-            <div class="text text-danger">
-                <h3><b>{{session::get('error')}}</b></h3>
-            </div>
-            @endif
-        </div>
-    </div>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -59,6 +42,13 @@
             </div>
         </form>
         <hr>
+        <div>
+        @if (Session::has('success'))
+        <div class="text text-success">
+            <h4><b>{{session::get('success')}}</b></h4>
+        </div>
+         @endif
+        </div>
         <div class="dropdown">
             <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown"><b>Bình
                     Luận:</b>
