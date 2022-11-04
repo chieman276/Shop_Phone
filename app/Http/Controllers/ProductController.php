@@ -148,27 +148,28 @@ class ProductController extends Controller
 
     public function orders()
     {
-        $sum_product = session('cart');
-        $user =  Auth::user();
-        foreach ($sum_product as $id_product) {
-            $orders['user_id'] = $user->id;
-            $orders['product_id'] = $id_product['id'];
-            $orders['quantity'] = $id_product['quantity'];
-            $orders['total'] = $id_product['price'] * $id_product['quantity'];
-            $orders['status'] = '0';
-            DB::table('orders')->insert($orders);
-        }
-        $products = session('cart');
-        foreach ($products as $product) {
-            unset($products[$product['id']]);
-            session()->put('cart', $products);
-        }
         try {
+            // $email_name = $user['email'];
             $name = "Mai Chiếm An";
             Mail::send('mail.send_email', compact('name'), function($email) use($name){
-                $email->subject('Demo test mail');
-                $email->to('chieman2k3@gmail.com', $name);
+                $email->subject('Mai Chiếm An');
+                $email->to('chieman2k3@gmail.com',$name);
             });
+            $sum_product = session('cart');
+            $user =  Auth::user();
+            foreach ($sum_product as $id_product) {
+                $orders['user_id'] = $user->id;
+                $orders['product_id'] = $id_product['id'];
+                $orders['quantity'] = $id_product['quantity'];
+                $orders['total'] = $id_product['price'] * $id_product['quantity'];
+                $orders['status'] = '0';
+                // DB::table('orders')->insert($orders);
+            }
+            $products = session('cart');
+            foreach ($products as $product) {
+                unset($products[$product['id']]);
+                session()->put('cart', $products);
+            }
             session()->flash('success', 'Giao dịch thành công!');
         } catch (\Exception $e) {
             Log::error($e->getMessage());

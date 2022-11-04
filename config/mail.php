@@ -93,7 +93,7 @@ return [
 
     'from' => [
         'address' => 'chieman2k3@gmail.com',
-        'name' => 'Shop Phone',
+        'name' => 'Công ty TNHH MCAN2K3',
     ],
 
     /*
