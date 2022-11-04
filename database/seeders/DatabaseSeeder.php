@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
     {
         $comment = new Comment();
         $comment->comment_name = 'Sản phẩm đẹp';
-        $comment->user_id = 2;
+        $comment->user_id = 3;
         $comment->product_id = 1;
         $comment->save();
         $comment = new Comment();
@@ -42,13 +42,13 @@ class DatabaseSeeder extends Seeder
 
         $comment = new Comment();
         $comment->comment_name = 'Iphone 12 ProMax xanh dương';
-        $comment->user_id = 2;
+        $comment->user_id = 1;
         $comment->product_id = 1;
         $comment->save();
         $comment = new Comment();
 
         $comment->comment_name = 'iPhone 12 Pro Max 128 GB một siêu phẩm smartphone đến từ Apple.';
-        $comment->user_id = 2;
+        $comment->user_id = 4;
         $comment->product_id = 1;
         $comment->save();
         $comment = new Comment();
