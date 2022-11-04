@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Excel;
+use Mail;
+
 
 class ProductController extends Controller
 {
@@ -162,6 +164,11 @@ class ProductController extends Controller
             session()->put('cart', $products);
         }
         try {
+            $name = "Mai Chiếm An";
+            Mail::send('mail.send_email', compact('name'), function($email) use($name){
+                $email->subject('Demo test mail');
+                $email->to('chieman2k3@gmail.com', $name);
+            });
             session()->flash('success', 'Giao dịch thành công!');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
