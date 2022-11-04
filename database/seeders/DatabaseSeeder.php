@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Comment;
 use App\Models\Discount;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
@@ -22,6 +23,80 @@ class DatabaseSeeder extends Seeder
         $this->importUsers();
         $this->importProducts();
         $this->importDiscounts();
+        $this->importComments();
+    }
+
+    public function importComments()
+    {
+        $comment = new Comment();
+        $comment->comment_name = 'Sản phẩm đẹp';
+        $comment->user_id = 2;
+        $comment->product_id = 1;
+        $comment->save();
+        $comment = new Comment();
+
+        $comment->comment_name = 'Chất lượng';
+        $comment->user_id = 2;
+        $comment->product_id = 1;
+        $comment->save();
+
+        $comment = new Comment();
+        $comment->comment_name = 'Iphone 12 ProMax xanh dương';
+        $comment->user_id = 2;
+        $comment->product_id = 1;
+        $comment->save();
+        $comment = new Comment();
+
+        $comment->comment_name = 'iPhone 12 Pro Max 128 GB một siêu phẩm smartphone đến từ Apple.';
+        $comment->user_id = 2;
+        $comment->product_id = 1;
+        $comment->save();
+        $comment = new Comment();
+        $comment->comment_name = ' Máy có một hiệu năng hoàn toàn mạnh mẽ đáp ứng tốt nhiều nhu cầu đến từ người dùng và mang trong mình một thiết kế đầy vuông vức, sang trọng.';
+        $comment->user_id = 2;
+        $comment->product_id = 1;
+        $comment->save();
+        $comment = new Comment();
+
+        $comment->comment_name = 'iPhone 12 Pro Max 128 GB một siêu phẩm smartphone đến từ Apple. Máy có một hiệu năng hoàn toàn mạnh mẽ đáp ứng tốt nhiều nhu cầu đến từ người dùng và mang trong mình một thiết kế đầy vuông vức, sang trọng.';
+        $comment->user_id = 2;
+        $comment->product_id = 1;
+        $comment->save();
+
+        $comment = new Comment();
+        $comment->comment_name = 'Sản phẩm đẹp';
+        $comment->user_id = 2;
+        $comment->product_id = 1;
+        $comment->save();
+        $comment = new Comment();
+
+        $comment->comment_name = 'Chất lượng';
+        $comment->user_id = 2;
+        $comment->product_id = 1;
+        $comment->save();
+
+        $comment = new Comment();
+        $comment->comment_name = 'Iphone 12 ProMax xanh dương';
+        $comment->user_id = 2;
+        $comment->product_id = 1;
+        $comment->save();
+        $comment = new Comment();
+
+        $comment->comment_name = 'Điện thoại iPhone 13 Pro Max 256GB';
+        $comment->user_id = 3;
+        $comment->product_id = 2;
+        $comment->save();
+        $comment = new Comment();
+        $comment->comment_name = 'Điện thoại iPhone 13 Pro Max 256GB một siêu phẩm smartphone đến từ Apple';
+        $comment->user_id = 1;
+        $comment->product_id = 2;
+        $comment->save();
+        $comment = new Comment();
+
+        $comment->comment_name = 'Máy có một hiệu năng hoàn toàn mạnh mẽ đáp ứng tốt nhiều nhu cầu đến từ người dùng và mang trong mình một thiết kế đầy vuông vức, sang trọng.';
+        $comment->user_id = 4;
+        $comment->product_id = 2;
+        $comment->save();
     }
 
     public function importDiscounts()
@@ -60,15 +135,115 @@ class DatabaseSeeder extends Seeder
         $discount->product_id = 1;
         $discount->user_id = 1;
         $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam100k';
+        $discount->price = '100000';
+        $discount->product_id = 1;
+        $discount->user_id = 2;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam200k';
+        $discount->price = '200000';
+        $discount->product_id = 1;
+        $discount->user_id = 2;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam300k';
+        $discount->price = '300000';
+        $discount->product_id = 1;
+        $discount->user_id = 2;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam400k';
+        $discount->price = '400000';
+        $discount->product_id = 1;
+        $discount->user_id = 2;
+        $discount->save();
+        
+        $discount = new Discount();
+        $discount->discountName = 'sp1giam500k';
+        $discount->price = '500000';
+        $discount->product_id = 1;
+        $discount->user_id = 2;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam100k';
+        $discount->price = '100000';
+        $discount->product_id = 2;
+        $discount->user_id = 1;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam200k';
+        $discount->price = '200000';
+        $discount->product_id = 1;
+        $discount->user_id = 1;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam300k';
+        $discount->price = '300000';
+        $discount->product_id = 2;
+        $discount->user_id = 1;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam400k';
+        $discount->price = '400000';
+        $discount->product_id = 2;
+        $discount->user_id = 1;
+        $discount->save();
+        
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam500k';
+        $discount->price = '500000';
+        $discount->product_id = 2;
+        $discount->user_id = 1;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam100k';
+        $discount->price = '100000';
+        $discount->product_id = 2;
+        $discount->user_id = 2;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam200k';
+        $discount->price = '200000';
+        $discount->product_id = 2;
+        $discount->user_id = 2;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam300k';
+        $discount->price = '300000';
+        $discount->product_id = 2;
+        $discount->user_id = 2;
+        $discount->save();
+
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam400k';
+        $discount->price = '400000';
+        $discount->product_id = 2;
+        $discount->user_id = 2;
+        $discount->save();
+        
+        $discount = new Discount();
+        $discount->discountName = 'sp2giam500k';
+        $discount->price = '500000';
+        $discount->product_id = 2;
+        $discount->user_id = 2;
+        $discount->save();
     }
 
     public function importUsers()
     {
-        // $table->string('userName');
-        // $table->string('email');
-        // $table->string('phone');
-        // $table->date('birthday');
-        // $table->string('password')
         $user = new User();
         $user->userName = 'AnMC';
         $user->email = 'an@gmail.com';
