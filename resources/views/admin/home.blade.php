@@ -24,11 +24,25 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-4 col-md-6">
+            <div class="col-xl-3 col-md-6">
             </div>
             <div class="col-xl-5 col-md-6">
                 <div class="card bg-info text-white mb-4">
-                    <h1 class="text-center">Có tổng số {{$order_count}} đơn hàng</h1>
+                    <h1 class="text-center">&emsp;Có tổng số {{$order_count}} đơn hàng&emsp;</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-1 col-md-6">
+            </div>
+            <div class="col-xl-5 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <h1 class="text-center">Có tổng số {{$discount_count}} mã giảm giá</h1>
+                </div>
+            </div>
+            <div class="col-xl-5 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <h1 class="text-center">Có tổng số {{$comment_count}} bình luận</h1>
                 </div>
             </div>
         </div>

@@ -27,12 +27,16 @@ class ProductController extends Controller
         $product_count = Product::count();
         $user_count = User::count();
         $order_count = Order::count();
+        $discount_count = Discount::count();
+        $comment_count = Comment::count();
 
 
         $params = [
             'product_count' => $product_count,
             'user_count' => $user_count,
             'order_count' => $order_count,
+            'discount_count' => $discount_count,
+            'comment_count' => $comment_count,
         ];
 
         return view('admin.home', $params);
