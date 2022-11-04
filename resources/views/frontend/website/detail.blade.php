@@ -3,12 +3,30 @@
 @section('content')
 
 <div class="container" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-10">
+            <div class="session-title">
+                @if (Session::has('success'))
+            </div>
+            <div class="text text-success">
+                <h3><b>{{session::get('success')}}</b></h3>
+            </div>
+            @endif
+            @if (Session::has('error'))
+            <div class="text text-danger">
+                <h3><b>{{session::get('error')}}</b></h3>
+            </div>
+            @endif
+        </div>
+    </div>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-7">
                         <div>
+                            <p class="product_id">{{$showProduct->id}}</p>
                             <img src="{{asset($showProduct->image)}}" height="350px" width="330px" alt="#">
                         </div>
                     </div>
@@ -28,6 +46,65 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <form method="post" action="">
+            @csrf
+            <div class="form-group">
+                <textarea class="form-control comment_name" type="text" placeholder="Đánh giá sản phẩm"
+                    name="comment_name"></textarea>
+            </div>
+            <div class="form-group">
+                <input style="background: rgb(252, 43, 15);" type="submit" class="btn btn-success sent_comment"
+                    value="Gửi" />
+            </div>
+        </form>
+        <hr>
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown"><b>Bình
+                    Luận:</b>
+                <span class="caret"></span></button>
+            <ul style="border: 5px solid #ccc; width:600px" class="dropdown-menu">
+                <div class="container">
+                        <div class="quickview-content">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    @foreach($comments as $comment)
+                                    @if($comment->product_id == $showProduct->id )
+                                    <li><b class="text-center"> &emsp; {{$comment->user->userName}}:</b>{{$comment->comment_name}} </li>
+                                    <hr>
+                                    @endif
+                                    @endforeach
+                                </div>
+                                <div class="col-lg-2"></div>
+                            </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
     </div>
+
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $('.product_id').hide();
+    $('.sent_comment').click(function (e) {
+        e.preventDefault();
+        var ele = $(this);
+        var product_id = $('.product_id').text();
+        var comment_name = $('.comment_name').val();
+        $.ajax({
+            url: '{{ route('add_comment') }}',
+            method: "post",
+            data: {
+                product_id: product_id,
+                data: comment_name,
+                _token: '{{ csrf_token() }}',
+            },
+            success: function (response) {
+                window.location.reload();
+            }
+        });
+    });
+</script>
 @endsection

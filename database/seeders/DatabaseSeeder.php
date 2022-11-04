@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
         $product = new Product();
         $product->productName = 'Iphone 12 ProMax xanh dương';
         $product->description = 'iPhone 12 Pro Max 128 GB một siêu phẩm smartphone đến từ Apple. Máy có một hiệu năng hoàn toàn mạnh mẽ đáp ứng tốt nhiều nhu cầu đến từ người dùng và mang trong mình một thiết kế đầy vuông vức, sang trọng.';
-        $product->image = "https://cdn.tgdd.vn/Files/2020/10/14/1298715/2_470x556.jpg";
+        $product->image = "https://cdn01.dienmaycholon.vn/filewebdmclnew/DMCL21/Picture/Apro/Apro_product_26647/iphone-12-pro-m_main_368_450.png.webp";
         $product->price = '27456000';
         $product->save();
 

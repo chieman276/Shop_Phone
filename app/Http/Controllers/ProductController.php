@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 use App\Exports\ProductExport;
 use App\Http\Requests\RegisterRequest;
 use App\Imports\ProductImport;
+use App\Models\Comment;
 use App\Models\Discount;
 use App\Models\Order;
 use App\Models\Product;
@@ -50,8 +51,12 @@ class ProductController extends Controller
     public function showProduct($id)
     {
         $showProduct = Product::find($id);
+        $comments = Comment::all();
+        $users = User::all();
         $params = [
-            'showProduct' => $showProduct
+            'showProduct' => $showProduct,
+            'comments' => $comments,
+            'users' => $users,
         ];
         return view('frontend.website.detail', $params);
     }

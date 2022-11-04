@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
@@ -54,4 +55,6 @@ Route::post('/import', [ProductController::class, 'import'])->name('products.imp
 Route::get('/list_orders', [ProductController::class, 'list_orders'])->name('list_orders');
 Route::patch('/update_list_order', [ProductController::class, 'update_list_orders'])->name('update_list_orders');
 Route::patch('/result_discounts', [DiscountController::class, 'result_discounts'])->name('result_discounts');
+
+Route::post('/add_comment', [CommentController::class, 'add_comment'])->name('add_comment');
 
