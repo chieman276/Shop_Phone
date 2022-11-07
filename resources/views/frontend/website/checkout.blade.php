@@ -1,6 +1,9 @@
 @extends('frontend.layouts.master')
 @section('content')
-<div class="search_img_box">
+<body class="search_img_box preloading">
+    <div class="load-a-fa-spinner">
+        <div><i class="fa fa-spinner fa-spin a-fa-spinner" style="font-size:80px; color:white"></i></div>
+    </div>
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-10">
@@ -136,13 +139,17 @@
         @endif
         <br>
     </div>
-</div>
+</body>
 
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
+ $('.remove-from-cart').attr('disabled', false);
+    $('.load-a-fa-spinner').hide();
     $(".remove-from-cart").click(function (e) {
+    $('.remove-from-cart').attr('disabled', true);
+    $('.load-a-fa-spinner').show();
         e.preventDefault();
         var ele = $(this);
         if(confirm('Bạn có chắc muốn mua sản phẩm')) {
@@ -158,7 +165,20 @@
                     window.location.reload();
                 }
             });
+            $.ajax({
+                url: '{{ route('orders') }}',
+                method: "post",
+                data: {
+                    _token: '{{ csrf_token() }}', 
+                    // sum_product: $('.sum_product').val(),
+                },
+
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
         }
+        
     });
 </script>
 

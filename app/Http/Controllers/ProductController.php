@@ -163,7 +163,7 @@ class ProductController extends Controller
                 $orders['quantity'] = $id_product['quantity'];
                 $orders['total'] = $id_product['price'] * $id_product['quantity'];
                 $orders['status'] = '0';
-                // DB::table('orders')->insert($orders);
+                DB::table('orders')->insert($orders);
             }
             $products = session('cart');
             foreach ($products as $product) {
