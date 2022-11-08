@@ -4,9 +4,6 @@
     <div class="search_img_box">
         <body>
             <div class="container">
-                {{-- @php  $sum_product = session('cart'); 
-                echo "<pre>"; print_r($sum_product); die();
-                @endphp --}}
                 <div class="col-lg-6">
                     <h1 class="text-center mt-5">Danh sách đơn hàng</h1>
                 </div>
@@ -27,28 +24,39 @@
                             <th>Tên khách hàng</th>
                             <th>Email</th>
                             <th>Số điên thoại</th>
-                            <th>Ngày sinh</th>
+                            {{-- <th>Ngày sinh</th> --}}
                             <th style="width:400px">Sản phẩm</th>
+                            <th>Mã giảm giá</th>
                             <th>Giá</th>
                             <th>Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($list_orders as $order)
+                        @foreach ($list_orders as $key => $order)
                         <tr data-id="{{ $order->id }}" class="product_hide">
-                            <td>{{ $order->id }}</td>
+                            <td>{{ ++$key }}</td>
                             <td>{{ $order->user->userName }}</td>
                             <td>{{ $order->user->email }}</td>
                             <td>{{ $order->user->phone }}</td>
-                            <td>{{ date('d/m/Y', strtotime($order->user->birthday)) }}</td>
+                            {{-- <td>{{ date('d/m/Y', strtotime($order->user->birthday)) }}</td> --}}
+                            @php 
+                            $total =  $order->product->price * $order->quantity; 
+                            $total_discount =  $order['total']; 
+                            $discount = $total - $total_discount;
+                            @endphp
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4"><img src="{{ asset($order->product->image) }}" style="width: 140px"></div>
-                                    <div class="col-lg-8"><p>số lượng: {{$order->quantity}}</p><p>{{$order->product->productName}}</p></div>
+                                    <div class="col-lg-8"><p>{{$order->product->productName}}</p><p>số lượng: {{$order->quantity}}</p> <p style="color:red">Tổng tiền: {{number_format($total)}} đ</p></div>
                                 </div>
                             </td>
-
-                            <td style="color:red">{{ number_format($order->product->price * $order->quantity) }} đ</td>
+                            <td style="color:red">
+                                @if($total - $total_discount > 0)
+                                <p style="color:red">{{ number_format($discount) }} đ</p>
+                                @endif
+                            </td>
+                            <td style="color:red">{{ number_format($total_discount) }} đ 
+                            </td>
                 
                             @if($order->status == '0')
                             <td>

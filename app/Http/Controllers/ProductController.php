@@ -149,17 +149,22 @@ class ProductController extends Controller
     public function orders()
     {
         try {
+            $discount = 'sp1giam100k';
             // $email_name = $user['email'];
-            $name = "Mai Chiếm An";
-            Mail::send('mail.send_email', compact('name'), function($email) use($name){
-                $email->subject('Mai Chiếm An');
-                $email->to('chieman2k3@gmail.com',$name);
-            });
+            // $name = "Mai Chiếm An";
+            // Mail::send('mail.send_email', compact('name'), function($email) use($name){
+            //     $email->subject('Mai Chiếm An');
+            //     $email->to('chieman2k3@gmail.com',$name);
+            // });
+            $count_discount = session()->get('data_discount');
+            echo "<pre>";print_r($count_discount);die();
+            $count_discount->delete();
             $sum_product = session('cart');
             $user =  Auth::user();
             foreach ($sum_product as $id_product) {
                 $orders['user_id'] = $user->id;
                 $orders['product_id'] = $id_product['id'];
+                $orders['discount'] = $discount;
                 $orders['quantity'] = $id_product['quantity'];
                 $orders['total'] = $id_product['price'] * $id_product['quantity'];
                 $orders['status'] = '0';

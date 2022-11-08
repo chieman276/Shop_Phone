@@ -78,15 +78,9 @@
                                     <div class="col-lg-4">
                                         <select class="value_discountName" >
                                             <option value="">Các mã giảm giá</option>
-                                            @php
-                                            $cart = session('cart');
-                                            echo "<pre>"; 
-                                            print_r($cart); 
-                                            echo"</pre>";
-                                            @endphp
                                             @foreach($discounts as $discount)
                                             @if($discount->user_id == $userAll->id)
-                                            <option value="{{$discount->discountName}}"><p> {{$discount->discountName}} </p></option>
+                                            <option value="{{$discount->discountName}}"> <button>{{$discount->discountName}}</button></option>
                                             @endif
                                             @endforeach
                                         </select>

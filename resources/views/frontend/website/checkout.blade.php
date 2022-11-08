@@ -165,18 +165,6 @@
                     window.location.reload();
                 }
             });
-            $.ajax({
-                url: '{{ route('orders') }}',
-                method: "post",
-                data: {
-                    _token: '{{ csrf_token() }}', 
-                    // sum_product: $('.sum_product').val(),
-                },
-
-                success: function (response) {
-                    window.location.reload();
-                }
-            });
         }
         
     });

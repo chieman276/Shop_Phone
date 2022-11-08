@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class DiscountController extends Controller
@@ -34,9 +35,10 @@ class DiscountController extends Controller
 
     public function result_discounts(Request $request)
     {
+        $requestData = $request->all();
+
         $user =  Auth::user();
         $discounts = Discount::all();
-        $requestData = $request->all();
         $discountName = $requestData['getData'];
         $cart = session()->get('cart');
         try {
@@ -45,22 +47,32 @@ class DiscountController extends Controller
                     $totals = $cart[$discount['product_id']]['price'] - $discount['price'];
                     $cart[$discount['product_id']]["price"] = $totals;
                     session()->put('cart', $cart);
-                    $discount = Discount::find($discount['id']);
-                    $discount->delete();
+                    // $discount = Discount::find($discount['id']);
+                    // $discount->delete();
+                    $id = $discount['id'];
+                    $discount = Discount::findOrFail($id);
+                    $data_discount = session()->get('data_discount', []);
+                        $data_discount[$id] = [
+                            "id" => $id,
+                            "discountName" => "discountName",
+                            "product_id" => $discount['product_id'],
+                            "user_id" => $discount['user_id'],
+                        ];
+                    session()->put('data_discount', $data_discount);
                     session()->flash('success', 'Áp dụng mã thành công!');
                     return false;
                 }
                 
             }
             if($discountName != $discount['discountName']){
-                session()->flash('error', 'Áp dụng mã không thành công!');
+                session()->flash('error', 'Áp dụng mã không thành công1!');
             }
             if($discountName == $discount['discountName'] && $discount['user_id'] != $user['id']){
-                session()->flash('error', 'Áp dụng mã không thành công!');
+                session()->flash('error', 'Áp dụng mã không thành công2!');
             }
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            session()->flash('error', 'Áp dụng mã không thành công!');
+            session()->flash('error', 'Áp dụng mã không thành công3!');
 
         }
 
